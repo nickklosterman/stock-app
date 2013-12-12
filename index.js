@@ -1,4 +1,5 @@
 var express = require('express')
+  , routes  = require('./server/routes')
   , path    = require('path')
   , app     = express();
 
@@ -12,8 +13,11 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 //
-// Bootstrap routes.
+// Routes
+// ======
 //
-require('./server/routes')(app);
+
+app.get('/', routes.index);
+app.get('/:id', routes.detail);
 
 app.listen(process.env.PORT || 3000);
