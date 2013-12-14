@@ -3,6 +3,7 @@ var express = require('express')
   , path    = require('path')
   , app     = express();
 
+app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'hbs');
 app.set('views', path.resolve(__dirname, 'views'));
 
@@ -20,4 +21,6 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.get('/', routes.index);
 app.get('/:id', routes.detail);
 
-app.listen(process.env.PORT || 3000);
+app.listen(app.get('port'), function() {
+  console.log('Server listening on port', app.get('port'));
+});
