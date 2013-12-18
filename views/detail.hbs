@@ -1,2 +1,56 @@
-<p class="four columns alpha">Symbol: {{stock.symbol}}</p>
-<p class="four columns omega">Rank: {{stock.rank}}</p>
+<!-- using google https://developers.google.com/speed/libraries/devguide and cdnjs  http://cdnjs.com/ -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+<script type="text/javascript">
+$(function(){
+ $('.linechart').sparkline('html', {chartRangeMin:1, chartRangeMax:20}); 
+//var myvalues = [10,8,5,7,4,4,1,9,];
+ //       $('.dynamicsparkline').sparkline(myvalues);
+});
+</script>
+<h2><a href="http://finance.yahoo.com/q?s={{this.ticker}}">{{this.ticker}}</a></h2>
+
+<span class="linechart">
+{{#each this.data}} 
+{{Rank}},
+{{/each}}
+</span>
+<!-- I believe the trailing comma forces the sparkline to artificially append a 0 to the end -->
+<!--
+<p>
+Sparkline with dynamic data: <span class="dynamicsparkline">Loading..</span>
+</p>
+-->
+
+{{!--
+<div><span class="two columns alpha">
+Date
+</span><span class="two columns omega">
+Rank
+</span>
+
+{{#each this.data}} 
+<div><span class="two columns alpha">{{Date}}</span><span class="two columns omega">
+{{Rank}}
+</span>
+</div>
+{{/each}}
+--}}
+
+
+
+{{!--
+<p class="four columns alpha">Date: {{Date}}</p>
+<p class="four columns omega">Rank: {{Rank}}</p>
+
+--}}
+
+
+<table>
+<tr>
+<th>Date</th><th>Rank</th>
+</tr>
+{{#each this.data}} 
+<tr><td class="">{{Date}}</td><td>{{Rank}}</td></tr>
+{{/each}}
+</table>
