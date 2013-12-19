@@ -3,54 +3,38 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
 <script type="text/javascript">
 $(function(){
- $('.linechart').sparkline('html', {chartRangeMin:1, chartRangeMax:20}); 
+ $('.linechart').sparkline('html', {chartRangeMin:1, chartRangeMax:20});
 //var myvalues = [10,8,5,7,4,4,1,9,];
  //       $('.dynamicsparkline').sparkline(myvalues);
 });
 </script>
-<h2><a href="http://finance.yahoo.com/q?s={{this.ticker}}">{{this.ticker}}</a></h2>
 
-<span class="linechart">
-{{#each this.data}} 
-{{Rank}},
-{{/each}}
-</span>
-<!-- I believe the trailing comma forces the sparkline to artificially append a 0 to the end -->
-<!--
-<p>
-Sparkline with dynamic data: <span class="dynamicsparkline">Loading..</span>
-</p>
--->
+<article class="sixteen columns">
+  <a href="/" class="one column back">⇤</a>
+  <h2 class="three columns"><a href="http://finance.yahoo.com/q?s={{this.ticker}}">{{this.ticker}}</a></h2>
 
-{{!--
-<div><span class="two columns alpha">
-Date
-</span><span class="two columns omega">
-Rank
-</span>
+  <div class="twelve columns linechart">
+    {{#each this.data}}
+      {{Rank}},
+    {{/each}}
+  </div>
+  <!-- I believe the trailing comma forces the sparkline to artificially append a 0 to the end -->
+  <!--
+  <p>
+  Sparkline with dynamic data: <span class="dynamicsparkline">Loading..</span>
+  </p>
+  -->
 
-{{#each this.data}} 
-<div><span class="two columns alpha">{{Date}}</span><span class="two columns omega">
-{{Rank}}
-</span>
-</div>
-{{/each}}
---}}
+  <header class="sixteen columns detail-header">
+    <h3 class="three columns alpha">Date</h3>
+    <h3 class="three columns omega">Rank</h3>
+  </header>
 
+  {{#each this.data}}
+    <div class="sixteen columns">
+      <span class="three columns alpha">{{Date}}</span>
+      <span class="three columns omega">{{Rank}}</span>
+    </div>
+  {{/each}}
 
-
-{{!--
-<p class="four columns alpha">Date: {{Date}}</p>
-<p class="four columns omega">Rank: {{Rank}}</p>
-
---}}
-
-
-<table>
-<tr>
-<th>Date</th><th>Rank</th>
-</tr>
-{{#each this.data}} 
-<tr><td class="">{{Date}}</td><td>{{Rank}}</td></tr>
-{{/each}}
-</table>
+</article>

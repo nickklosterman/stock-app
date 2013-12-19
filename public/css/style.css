@@ -421,7 +421,6 @@ legend span {
 .container .columns {
   float: left;
   display: inline;
-  margin-left: 10px;
   margin-right: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -854,6 +853,21 @@ legend span {
 
 /* Custom styles go le here: */
 
+.back {
+  text-decoration: none;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.linechart {
+  margin-top: 10px;
+}
+
+.detail-header {
+  border-bottom: 1px solid #DCDCDC;
+  margin-bottom: 5px;
+  padding-bottom: 0;
+}
 
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
