@@ -254,7 +254,7 @@ img.scale-with-grid {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
   background-color: #046dd5;
-  color: #fdfdfd;
+  color: #fdfdfd !important;
 }
 .btn:active {
   outline: none;
@@ -269,10 +269,10 @@ img.scale-with-grid {
   text-align: center;
 }
 .btn:hover {
-  background-color: #0460bc;
+  background-color: #0460bc !important;
 }
 .btn:active {
-  background-color: #0353a3;
+  background-color: #0353a3 !important;
   color: #f0f0f0;
 }
 
@@ -290,7 +290,7 @@ img.scale-with-grid {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
   background-color: #444444;
-  color: white;
+  color: white !important;
 }
 .btn-dark:active {
   outline: none;
@@ -309,7 +309,7 @@ img.scale-with-grid {
 }
 .btn-dark:active {
   background-color: #2b2b2b;
-  color: #f2f2f2;
+  color: #f2f2f2 !important;
 }
 
 button::-moz-focus-inner,
@@ -852,6 +852,10 @@ legend span {
 }
 
 /* Custom styles go le here: */
+
+a.btn, a.btn-dark {
+  text-align: center;
+}
 
 .back {
   text-decoration: none;
