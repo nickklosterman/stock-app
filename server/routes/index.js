@@ -29,7 +29,7 @@ function getDistinctDates(callback) {
     queryResult.data=[]; //for handlebars, to use #each, I need to package into a named array.
     var sql = "SELECT distinct(date) from BC20";// order by date Asc";
     db.all(sql,function(err,rows){
-	if (err){ console.log(err) } 
+	if (err){ console.log(err) }
 	else {
 	    rows.forEach(function (row) {
 		console.log(row);
@@ -88,45 +88,40 @@ exports.index = function index(req, res) {
 
 //need to use a callback since this shit be all async yo
     getDistinctTickers(function(data) {
-	console.log("now go render index");
+	console.log('now go render index');
 	console.log(data)
 	return	res.render('index',data);
 
-    });    
-
-};
-
-
-exports.datesindex = function index(req, res) {
-    createDb();
-
-//need to use a callback since this shit be all async yo
-    getDistinctDates(function(data) {
-	console.log("now go render datesindex");
-	console.log(data)
-	return	res.render('datesindex',data);
-
-    });    
-
-}; 
-
-exports.detail = function detail(req, res) {
-    // TODO: get stock data for symbol.
-    createDb();
-    console.log(req.params.id)
-    getTickersRanking(req.params.id, function(data) {
-	data.ticker = req.params.id;
-	return res.render('detail', data);
     });
-    
+
 };
 
+//
+// Get data for all dates or specific date data if specified.
+//
+exports.dates = function dates(req, res) {
+  createDb();
 
-exports.date_rank_list = function date(req,res) {
-    createDb();
+  if (req.params.date) {
     console.log(req.params.date);
     getDateList(req.params.date, function(data) {
-	data.date=req.params.date;
-	return res.render('date-rank-list',data);
+      data.date = req.params.date;
+      res.render('date-rank-list', data);
     });
+  } else {
+    getDistinctDates(function(data) {
+      console.log('now go render datesindex');
+      console.log(data)
+      res.render('datesindex', data);
+    });
+  }
+};
+
+exports.detail = function detail(req, res) {
+  createDb();
+  console.log(req.params.id)
+  getTickersRanking(req.params.id, function(data) {
+    data.ticker = req.params.id;
+    return res.render('detail', data);
+  });
 };

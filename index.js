@@ -20,9 +20,10 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 //routes are order specific. it will execute teh firs route matched. 
 //why don't we use the express router?
+
+// We are using the express router!
 app.get('/', routes.index);
-app.get('/dates/', routes.datesindex);
-app.get('/dates/:date', routes.date_rank_list );
+app.get('/dates/:date?', routes.dates);
 app.get('/:id', routes.detail);
 
 
