@@ -2,6 +2,9 @@ var sqlite3 = require('sqlite3')
   , debug   = require('debug')('router')
   , util    = require('util');
 
+//
+// Execute the SQL statement against the local database and render the result.
+//
 var execSql = function(sql, res, view, opt) {
   debug('executing SQL: %s', sql);
   var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
@@ -36,6 +39,9 @@ exports.dates = function(req, res) {
   }
 };
 
+//
+// Get detail for the specified ID and render the data.
+//
 exports.detail = function(req, res) {
   execSql(
     util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id)
