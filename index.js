@@ -19,14 +19,9 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 // ======
 //
 
-//routes are order specific. it will execute teh firs route matched. 
-//why don't we use the express router?
-
-// We are using the express router!
 app.get('/', routes.index);
 app.get('/dates/:date?', routes.dates);
 app.get('/:id', routes.detail);
-
 
 app.listen(app.get('port'), function() {
   console.log('Server listening on port', app.get('port'));
