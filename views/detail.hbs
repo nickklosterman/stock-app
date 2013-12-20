@@ -9,32 +9,36 @@ $(function(){
 });
 </script>
 
-<article class="sixteen columns">
-  <a href="/" class="one column back">⇤</a>
-  <h2 class="three columns"><a href="http://finance.yahoo.com/q?s={{this.ticker}}">{{this.ticker}}</a></h2>
+{{#if error}}
+  <div class="error">{{error}}</div>
+{{else}}
+  <article class="sixteen columns">
+    <a href="/" class="one column back">⇤</a>
+    <h2 class="three columns"><a href="http://finance.yahoo.com/q?s={{this.ticker}}">{{this.ticker}}</a></h2>
 
-  <div class="twelve columns linechart">
-    {{#each this.data}}
-      {{Rank}},
-    {{/each}}
-  </div>
-  <!-- I believe the trailing comma forces the sparkline to artificially append a 0 to the end -->
-  <!--
-  <p>
-  Sparkline with dynamic data: <span class="dynamicsparkline">Loading..</span>
-  </p>
-  -->
-
-  <header class="sixteen columns detail-header">
-    <h3 class="three columns alpha">Date</h3>
-    <h3 class="three columns omega">Rank</h3>
-  </header>
-
-  {{#each this.data}}
-    <div class="sixteen columns">
-      <span class="three columns alpha">{{Date}}</span>
-      <span class="three columns omega">{{Rank}}</span>
+    <div class="twelve columns linechart">
+      {{#each this.data}}
+        {{Rank}},
+      {{/each}}
     </div>
-  {{/each}}
+    <!-- I believe the trailing comma forces the sparkline to artificially append a 0 to the end -->
+    <!--
+    <p>
+    Sparkline with dynamic data: <span class="dynamicsparkline">Loading..</span>
+    </p>
+    -->
 
-</article>
+    <header class="sixteen columns detail-header">
+      <h3 class="three columns alpha">Date</h3>
+      <h3 class="three columns omega">Rank</h3>
+    </header>
+
+    {{#each this.data}}
+      <div class="sixteen columns">
+        <span class="three columns alpha">{{Date}}</span>
+        <span class="three columns omega">{{Rank}}</span>
+      </div>
+    {{/each}}
+
+  </article>
+{{/if}}

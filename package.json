@@ -4,7 +4,7 @@
   "description": "Node.js stock application.",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "DEBUG=* node .",
     "test": "make test"
   },
   "repository": {
@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "~3.4.7",
     "hbs": "~2.4.0",
-    "sqlite3": "~2.1"
+    "sqlite3": "~2.1",
+    "debug": "~0.7.4"
   },
   "devDependencies": {
     "gulp": "~3.1.4",

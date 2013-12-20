@@ -863,6 +863,12 @@ a.btn, a.btn-dark {
   margin-top: 10px;
 }
 
+.error {
+  text-align: center;
+  color: #700000;
+  font-size: 21px;
+}
+
 .linechart {
   margin-top: 10px;
 }

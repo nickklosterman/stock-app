@@ -1,10 +1,17 @@
-<h2{{this.date}}</h2>
+{{#if error}}
+  <div class="error">{{error}}</div>
+{{else}}
+  <h2>{{this.date}}</h2>
 
-<table>
-<tr>
-<th>StockTicker</th><th>Rank</th>
-</tr>
-{{#each this.data}} 
-<tr><td class="">{{StockTicker}}</td><td>{{Rank}}</td></tr>
-{{/each}}
-</table>
+  <table>
+    <tr>
+      <th>StockTicker</th><th>Rank</th>
+    </tr>
+  {{#each this.data}}
+    <tr>
+      <td class="">{{StockTicker}}</td>
+      <td>{{Rank}}</td>
+    </tr>
+  {{/each}}
+  </table>
+{{/if}}

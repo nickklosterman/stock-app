@@ -1,5 +1,7 @@
-<p class="thirteen columns content">Hello from stock app.</p>
-
-{{#each data}} 
-<a href="{{this.Date}}">{{this.Date}}</a>
-{{/each}}
+{{#if error}}
+  <div class="error">{{error}}</div>
+{{else}}
+  {{#each data}}
+    <a href="{{this.Date}}">{{this.Date}}</a>
+  {{/each}}
+{{/if}}

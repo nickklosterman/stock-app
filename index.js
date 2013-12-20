@@ -23,6 +23,4 @@ app.get('/', routes.index);
 app.get('/dates/:date?', routes.dates);
 app.get('/:id', routes.detail);
 
-app.listen(app.get('port'), function() {
-  console.log('Server listening on port', app.get('port'));
-});
+app.listen(app.get('port'));

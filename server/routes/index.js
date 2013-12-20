@@ -1,127 +1,44 @@
+var sqlite3 = require('sqlite3')
+  , debug   = require('debug')('router')
+  , util    = require('util');
 
-var sqlite3 = require('sqlite3');
-var db;
+var execSql = function(sql, res, view) {
+  debug('executing SQL: %s', sql);
+  var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
 
-function createDb() {
-    console.log("createDb chain");
-    db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
-};
-
-function getDistinctTickers(callback) {
-    console.log('get distinct tickers');
-    var queryResult={};
-    queryResult.data=[]; //for handlebars, to use #each, I need to package into a named array.
-    var sql = "SELECT DISTINCT(stockticker) FROM BC20 ORDER BY stockticker ASC";
-    db.all(sql,function(err,rows){
-	rows.forEach(function (row) {
-	    console.log(row);
-	    queryResult.data.push(row);
-	});
-	closeDb();
-	callback( queryResult);
-    });
-    //it's async so we return inside the callback.
-};
-
-function getDistinctDates(callback) {
-    console.log('get distinct tickers');
-    var queryResult={};
-    queryResult.data=[]; //for handlebars, to use #each, I need to package into a named array.
-    var sql = "SELECT distinct(date) from BC20";// order by date Asc";
-    db.all(sql,function(err,rows){
-	if (err){ console.log(err) }
-	else {
-	    rows.forEach(function (row) {
-		console.log(row);
-		queryResult.data.push(row);
-	    });
-	}
-
-	closeDb();
-	callback( queryResult);
-    });
-
-};
-
-function closeDb() {
-    console.log("closeDb");
+  db.all(sql, function(err, rows) {
+    debug('SQL execution complete.');
     db.close();
-}
-function getDateList(date,callback) {
-console.log('get rank list for a particular date');
-console.log(date);
-var queryResult={};
-    queryResult.data=[]; //for handlebars, to use #each, I need to package into a named array.
-    var sql = "SELECT rank,stockticker from BC20 where Date=\""+date+"\" order by Rank Asc";
-    db.all(sql,function(err,rows){
-	rows.forEach(function (row) {
-	    console.log(row);
-	    queryResult.data.push(row);
-	});
-	closeDb();
-	callback( queryResult);
-    });
+
+    if (err) return res.render(view, { error: err.message });
+    res.render(view, { data: rows });
+  });
 };
 
-
-function getTickersRanking(ticker,callback) {
-console.log('get date and ranking info from db');
-    var queryResult={};
-    queryResult.data=[]; //for handlebars, to use #each, I need to package into a named array.
-    var sql = "SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE \""+ticker+"\" ORDER BY rank ASC";
-    db.all(sql,function(err,rows){
-	if (typeof rows !== undefined){  ///needs some type of error handling here.
-	    rows.forEach(function (row) {
-		console.log(row);
-		queryResult.data.push(row);
-	    });
-	}
-	closeDb();
-	callback( queryResult);
-    });
-
-};
-
-
-exports.index = function index(req, res) {
-    createDb();
-
-//need to use a callback since this shit be all async yo
-    getDistinctTickers(function(data) {
-	console.log('now go render index');
-	console.log(data)
-	return	res.render('index',data);
-
-    });
-
+//
+// Get all ordered
+//
+exports.index = function(req, res) {
+  execSql('SELECT DISTINCT(stockticker) FROM BC20 ORDER BY stockticker ASC', res, 'index');
 };
 
 //
 // Get data for all dates or specific date data if specified.
 //
-exports.dates = function dates(req, res) {
-  createDb();
-
+exports.dates = function(req, res) {
   if (req.params.date) {
-    console.log(req.params.date);
-    getDateList(req.params.date, function(data) {
-      data.date = req.params.date;
-      res.render('date-rank-list', data);
-    });
+    execSql(
+      util.format('SELECT rank,stockticker from BC20 where Date="%s" order by Rank Asc', req.params.date)
+    , res
+    , 'date-rank-list');
   } else {
-    getDistinctDates(function(data) {
-      console.log('now go render datesindex');
-      console.log(data)
-      res.render('datesindex', data);
-    });
+    execSql('SELECT distinct(date) from BC20', res, 'datesindex');
   }
 };
 
-exports.detail = function detail(req, res) {
-  createDb();
-  console.log(req.params.id)
-  getTickersRanking(req.params.id, function(data) {
-    data.ticker = req.params.id;
-    return res.render('detail', data);
-  });
+exports.detail = function(req, res) {
+  execSql(
+    util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id)
+  , res
+  , 'detail');
 };
