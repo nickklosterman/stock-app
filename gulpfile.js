@@ -8,6 +8,7 @@ gulp.task('lint', function() {
   , 'gulpfile.js'
   , 'server/**/*.js'
   , 'public/js/*.js'
+  , '!public/js/jquery.sparkline.min.js'
   ])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
