@@ -11,6 +11,7 @@ app.disable('x-powered-by');
 
 app.use(express.compress());
 app.use(express.json());
+app.use(express.favicon());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 //
