@@ -1,14 +1,3 @@
-<!-- using google https://developers.google.com/speed/libraries/devguide and cdnjs  http://cdnjs.com/ -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-<script type="text/javascript">
-$(function(){
- $('.linechart').sparkline('html', {chartRangeMin:1, chartRangeMax:20});
-//var myvalues = [10,8,5,7,4,4,1,9,];
- //       $('.dynamicsparkline').sparkline(myvalues);
-});
-</script>
-
 {{#if error}}
   <div class="error">{{error}}</div>
 {{else}}

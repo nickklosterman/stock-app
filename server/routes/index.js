@@ -2,7 +2,7 @@ var sqlite3 = require('sqlite3')
   , debug   = require('debug')('router')
   , util    = require('util');
 
-var execSql = function(sql, res, view) {
+var execSql = function(sql, res, view, opt) {
   debug('executing SQL: %s', sql);
   var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
 
@@ -11,7 +11,7 @@ var execSql = function(sql, res, view) {
     db.close();
 
     if (err) return res.render(view, { error: err.message });
-    res.render(view, { data: rows });
+    res.render(view, util._extend({ data: rows }, opt));
   });
 };
 
@@ -40,5 +40,6 @@ exports.detail = function(req, res) {
   execSql(
     util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id)
   , res
-  , 'detail');
+  , 'detail'
+  , { ticker: req.params.id });
 };
