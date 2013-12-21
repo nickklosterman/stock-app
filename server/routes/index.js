@@ -52,7 +52,7 @@ exports.detail = function(req, res) {
 
 exports.stocks = function(req, res) {
   var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
-  
+
   if (req.params.id) {
     db.all(
       util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id),
