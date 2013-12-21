@@ -20,7 +20,9 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 //
 
 app.get('/', routes.index);
-app.get('/dates/:date?', routes.dates);
-app.get('/:id', routes.detail);
+app.get('/api/stocks/:id?', routes.stocks);
+
+// app.get('/dates/:date?', routes.dates);
+// app.get('/:id', routes.detail);
 
 app.listen(app.get('port'));

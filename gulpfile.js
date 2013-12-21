@@ -9,6 +9,8 @@ gulp.task('lint', function() {
   , 'server/**/*.js'
   , 'public/js/*.js'
   , '!public/js/jquery.sparkline.min.js'
+  , '!public/js/backbone-min.js'
+  , '!public/js/underscore-min.js'
   ])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
