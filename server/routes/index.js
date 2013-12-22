@@ -22,7 +22,7 @@ var execSqlRender = function(sql, res, view, opt) {
 // Get all ordered
 //
 exports.index = function(req, res) {
-  execSqlRender('SELECT DISTINCT(stockticker) FROM BC20 ORDER BY stockticker ASC', res, 'index');
+  res.render('index');
 };
 
 //
@@ -37,17 +37,6 @@ exports.dates = function(req, res) {
   } else {
     execSqlRender('SELECT distinct(date) from BC20', res, 'datesindex');
   }
-};
-
-//
-// Get detail for the specified ID and render the data.
-//
-exports.detail = function(req, res) {
-  execSqlRender(
-    util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id)
-  , res
-  , 'detail'
-  , { ticker: req.params.id });
 };
 
 exports.stocks = function(req, res) {

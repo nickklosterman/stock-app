@@ -4,6 +4,7 @@ var express = require('express')
   , app     = express();
 
 app.set('port', process.env.PORT || 3000);
+app.set('isprod', process.env.NODE_ENV === 'production');
 app.set('view engine', 'hbs');
 app.set('views', path.resolve(__dirname, 'views'));
 
@@ -23,6 +24,5 @@ app.get('/', routes.index);
 app.get('/api/stocks/:id?', routes.stocks);
 
 // app.get('/dates/:date?', routes.dates);
-// app.get('/:id', routes.detail);
 
 app.listen(app.get('port'));
