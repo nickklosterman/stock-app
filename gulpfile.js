@@ -13,6 +13,7 @@ gulp.task('lint', function() {
   , '!public/js/jquery.sparkline.min.js'
   , '!public/js/backbone-min.js'
   , '!public/js/underscore-min.js'
+  , '!public/js/app.min.js'
   ])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
