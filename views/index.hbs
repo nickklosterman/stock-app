@@ -14,8 +14,12 @@
       <h2 class="three columns"><a href="http://finance.yahoo.com/q?s=<%= ticker %>"><%= ticker %></a></h2>
 
       <div class="twelve columns linechart">
-        <% _.each(data, function(stock) { %>
-          <%= stock.Rank %>,
+        <% _.each(data, function(stock, index) { %>
+          <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
+            <%= stock.Rank %>
+          <% } else { %>
+            <%= stock.Rank %>,
+          <% } %>
         <% }); %>
       </div>
 
