@@ -11,30 +11,30 @@
 
 <script id="detail" type="text/template">
   <article class="sixteen columns">
-      <a href="/#/" class="one column back">⇤</a>
-      <h2 class="three columns"><a href="http://finance.yahoo.com/q?s=<%= ticker %>"><%= ticker %></a></h2>
+    <a href="/#/" class="one column back">⇤</a>
+    <h2 class="three columns"><%= ticker %></h2>
 
-      <div class="eleven columns linechart">
-        <% _.each(data, function(stock, index) { %>
-          <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
-            <%= stock.Rank %>
-          <% } else { %>
-            <%= stock.Rank %>,
-          <% } %>
-        <% }); %>
-      </div>
-
-      <header class="sixteen columns detail-header">
-        <h3 class="three columns alpha">Date</h3>
-        <h3 class="three columns omega">Rank</h3>
-      </header>
-
-      <% _.each(data, function(stock) { %>
-        <div class="sixteen columns">
-          <span class="three columns alpha"><%= stock.Date %></span>
-          <span class="three columns omega"><%= stock.Rank %></span>
-        </div>
+    <div class="eleven columns linechart">
+      <% _.each(data, function(stock, index) { %>
+        <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
+          <%= stock.Rank %>
+        <% } else { %>
+          <%= stock.Rank %>,
+        <% } %>
       <% }); %>
+    </div>
 
-    </article>
+    <header class="sixteen columns detail-header">
+      <h3 class="three columns alpha">Date</h3>
+      <h3 class="three columns omega">Rank</h3>
+    </header>
+
+    <% _.each(data, function(stock) { %>
+      <div class="sixteen columns">
+        <span class="three columns alpha"><%= stock.Date %></span>
+        <span class="three columns omega"><%= stock.Rank %></span>
+      </div>
+    <% }); %>
+
+  </article>
 </script>
