@@ -31,7 +31,9 @@ window.StockApp.Collections = {};
     initialize: function(options) {
       this.ticker = options.ticker;
       this.model = new StockApp.Models.Stock();
-      this.model.url = this.model.rootUrl + this.ticker;
+      this.model.url = function() {
+        return this.rootUrl + options.ticker;
+      };
 
       this.model.fetch({ success: _.bind(this.render, this) });
     },
