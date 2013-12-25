@@ -22,7 +22,6 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.get('/', routes.index);
 app.get('/api/stocks/:id?', routes.stocks);
-
-// app.get('/dates/:date?', routes.dates);
+app.get('/api/dates/:date?', routes.dates);
 
 app.listen(app.get('port'));
