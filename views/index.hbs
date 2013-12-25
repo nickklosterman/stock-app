@@ -4,7 +4,7 @@
   <article class="sixteen columns">
     <h3 class="sixteen columns">Click a Stock To See the Deets</h3>
     <% _.each(stocks, function(stock) { %>
-      <a href="/#/<%= stock.StockTicker %>" class="three columns btn"><%= stock.StockTicker %></a>
+      <a href="/#/<%= stock.StockTicker %>" class="three columns btn"><%= stock.StockTicker %>  (<%= stock.count_stockticker %>)</a>
     <% }); %>
   </article>
 </script>
@@ -12,7 +12,9 @@
 <script id="detail" type="text/template">
   <article class="sixteen columns">
     <a href="/#/" class="one column back">⇤</a>
-    <h2 class="three columns"><%= ticker %></h2>
+    <h2 class="three columns"> <a href="http://finance.yahoo.com/q?s=<%= ticker %>"> <%= ticker %></a> </h2>
+
+
 
     <div class="eleven columns linechart">
       <% _.each(data, function(stock, index) { %>

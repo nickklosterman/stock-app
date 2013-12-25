@@ -50,7 +50,7 @@ exports.stocks = function(req, res) {
         res.json(rows);
       });
   } else {
-    db.all('SELECT DISTINCT(stockticker) FROM BC20 ORDER BY stockticker ASC', function(err, rows) {
+    db.all('SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 GROUP BY stockticker ORDER BY stockticker ASC', function(err, rows) {
       db.close();
       if (err) return res.json(501, { error: err.message });
       res.json(rows);
