@@ -60,7 +60,7 @@ window.StockApp.Collections = {};
     render: function() {
       this.$el.html(this.template({ stocks: this.collection.toJSON() }));
     },
-    clearSelection: function(e) {
+    clearSelection: function() {
       $('.selected').removeClass('selected');
       if (this.detail) this.detail.hide();
     },

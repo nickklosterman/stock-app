@@ -889,6 +889,10 @@ a.btn, a.btn-dark {
   margin-top: 10px;
 }
 
+.ticker-heading {
+  margin-bottom: 20px;
+}
+
 .detail-header {
   border-bottom: 1px solid #DCDCDC;
   margin-bottom: 5px;

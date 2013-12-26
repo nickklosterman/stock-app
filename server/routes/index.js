@@ -39,17 +39,19 @@ exports.stocks = function(req, res) {
 
   if (req.params.id) {
     db.all(
-       //util.format('SELECT id,date,rank FROM BC20 WHERE StockTicker LIKE "%s" ORDER BY rank ASC', req.params.id),
-util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id), // if you order by DESC, then everything is reverse chronological 
+      util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id),
       function(err, rows) {
         db.close();
         if (err) return res.json(501, { error: err.message });
         res.json(rows);
       });
   } else {
-      db.all('SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 GROUP BY stockticker ORDER BY stockticker ASC', function(err, rows) {	//	 db.close();
-      if (err) return res.json(501, { error: err.message });
-	  res.json(rows);
+    db.all(
+      'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 GROUP BY stockticker ORDER BY stockticker ASC',
+      function(err, rows) {
+        db.close();
+        if (err) return res.json(501, { error: err.message });
+        res.json(rows);
       });
   }
 };
