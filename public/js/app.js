@@ -14,19 +14,8 @@ window.StockApp.Collections = {};
     url: '/api/stocks'
   });
 
-  StockApp.Views.Index = Backbone.View.extend({
-    el: '.container',
-    template: _.template($('#index').html()),
-    initialize: function() {
-      this.collection.fetch({ success: _.bind(this.render, this) });
-    },
-    render: function() {
-      this.$el.html(this.template({ stocks: this.collection.toJSON() }));
-    }
-  });
-
   StockApp.Views.Detail = Backbone.View.extend({
-    el: '.container',
+    el: '.detail',
     template: _.template($('#detail').html()),
     initialize: function(options) {
       this.ticker = options.ticker;
@@ -43,8 +32,36 @@ window.StockApp.Collections = {};
         data: this.model.toJSON()
       }));
 
-      this.$el.find('.linechart').sparkline('html', { chartRangeMin: 1, chartRangeMax: 20 });
+      //
+      // Add the `selected` class to the button for the current ticker then
+      //    initialize the line chart.
+      //
+      $('a.btn:contains("'+ this.ticker +'")').addClass('selected');
+      this.$el.find('.linechart').sparkline('html', {
+        chartRangeMin: 1,
+        chartRangeMax: 20
+      });
     }
+  });
+
+  StockApp.Views.Index = Backbone.View.extend({
+    el: '.list',
+    events: {
+      'click a.btn': 'clearSelection'
+    },
+    template: _.template($('#index').html()),
+    initialize: function() {
+      this.collection.fetch({ success: _.bind(this.render, this) });
+    },
+    render: function() {
+      this.$el.html(this.template({ stocks: this.collection.toJSON() }));
+    },
+    clearSelection: function(e) {
+      $('.selected').removeClass('selected');
+    },
+    showDetail: function(options) {
+      this.detail = new StockApp.Views.Detail(options);
+    },
   });
 
   StockApp.Router = Backbone.Router.extend({
@@ -54,15 +71,20 @@ window.StockApp.Collections = {};
     },
     index: function() {
       console.log('router::view::index');
-      new StockApp.Views.Index({
+      this.indexView = new StockApp.Views.Index({
         collection: new StockApp.Collections.Stocks()
       });
     },
     detail: function(ticker) {
       console.log('router::view::detail');
-      new StockApp.Views.Detail({
-        ticker: ticker
-      });
+
+      //
+      // Ensure that links directly to the detail for a ticker correctly
+      //    instantiate the index view. This will correctly save the state
+      //    of the application in the URL of the ticker.
+      //
+      if (!this.indexView) this.index();
+      this.indexView.showDetail({ ticker: ticker });
     }
   });
 

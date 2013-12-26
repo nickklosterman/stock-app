@@ -1,4 +1,5 @@
-<div class="container"></div>
+<div class="container list"></div>
+<div class="container detail"></div>
 
 <script id="index" type="text/template">
   <article class="sixteen columns">
@@ -11,10 +12,7 @@
 
 <script id="detail" type="text/template">
   <article class="sixteen columns">
-    <a href="/#/" class="one column back">⇤</a>
     <h2 class="three columns"> <a href="http://finance.yahoo.com/q?s=<%= ticker %>" target="_blank"> <%= ticker %></a> </h2>
-
-
 
     <div class="eleven columns linechart">
       <% _.each(data, function(stock, index) { %>

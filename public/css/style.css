@@ -853,6 +853,12 @@ legend span {
 
 /* Custom styles go le here: */
 
+.selected {
+  -webkit-box-shadow: inset 0 0 10px #000;
+     -moz-box-shadow: inset 0 0 10px #000;
+          box-shadow: inset 0 0 10px #000;
+}
+
 a.btn, a.btn-dark {
   text-align: center;
 }
