@@ -36,7 +36,7 @@ window.StockApp.Collections = {};
       // Add the `selected` class to the button for the current ticker then
       //    initialize the line chart.
       //
-      $('a.btn:contains("'+ this.ticker +'")').addClass('selected');
+      $('a.btn[data-ticker="'+ this.ticker +'"]').addClass('selected');
       this.$el.find('.linechart').sparkline('html', {
         chartRangeMin: 1,
         chartRangeMax: 20
