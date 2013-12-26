@@ -23,6 +23,6 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.get('/', routes.index);
 app.get('/api/stocks/:id?', routes.stocks);
 
-//  app.get('/dates/:date?', routes.dates); //the route for the actual date detail is broken
+// app.get('/dates/:date?', routes.dates);
 
 app.listen(app.get('port'));
