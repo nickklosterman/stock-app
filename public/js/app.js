@@ -33,14 +33,18 @@ window.StockApp.Collections = {};
       }));
 
       //
-      // Add the `selected` class to the button for the current ticker then
-      //    initialize the line chart.
+      // Add the `selected` class to the button for the current ticker, slide
+      //    the view into view, then initialize the line chart.
       //
       $('a.btn[data-ticker="'+ this.ticker +'"]').addClass('selected');
+      this.$el.slideDown();
       this.$el.find('.linechart').sparkline('html', {
         chartRangeMin: 1,
         chartRangeMax: 20
       });
+    },
+    hide: function() {
+      this.$el.hide();
     }
   });
 
@@ -58,6 +62,7 @@ window.StockApp.Collections = {};
     },
     clearSelection: function(e) {
       $('.selected').removeClass('selected');
+      if (this.detail) this.detail.hide();
     },
     showDetail: function(options) {
       this.detail = new StockApp.Views.Detail(options);
