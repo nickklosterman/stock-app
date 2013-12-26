@@ -413,7 +413,7 @@ legend span {
 .container {
   position: relative;
   width: 960px;
-  margin: 40px auto 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -852,6 +852,22 @@ legend span {
 }
 
 /* Custom styles go le here: */
+
+.selected {
+  background-color: #C50000 !important;
+}
+
+.selected:hover {
+  background-color: #AE0000 !important;
+}
+
+.list {
+  margin-top: 40px;
+}
+
+.detail {
+  margin-bottom: 40px;
+}
 
 a.btn, a.btn-dark {
   text-align: center;
