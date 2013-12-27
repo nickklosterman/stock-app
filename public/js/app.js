@@ -38,9 +38,11 @@ window.StockApp.Collections = {};
       });
     },
     show: function() {
+      document.title = 'Stock App | ' + this.ticker;
       this.$el.fadeIn(100);
     },
     hide: function() {
+      document.title = 'Stock App';
       this.$el.fadeOut(100);
     }
   });

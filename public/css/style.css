@@ -865,10 +865,6 @@ legend span {
   margin-top: 40px;
 }
 
-.detail {
-  margin-bottom: 40px;
-}
-
 a.btn, a.btn-dark {
   text-align: center;
 }
@@ -920,9 +916,8 @@ a.btn, a.btn-dark {
 
 .close {
   font-size: 20px;
-  text-align: right;
+  text-align: left;
   text-decoration: none;
-  width: 50px;
 }
 
 * {
@@ -955,5 +950,7 @@ a.btn, a.btn-dark {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
-  
+  .close {
+    text-align: center;
+  }
 }

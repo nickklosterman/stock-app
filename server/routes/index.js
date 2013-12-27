@@ -1,6 +1,15 @@
 var sqlite3 = require('sqlite3')
   , util    = require('util');
 
+function compute_percentage_growth(rows) {
+  var initialvalue = (rows[0]).Open;
+
+  for (var counter = 0; counter < rows.length; counter++) {
+    var item = rows[counter];
+    item.percentage_growth = ((item.Open-initialvalue) / initialvalue * 100).toFixed(2);
+  }
+}
+
 //
 // Render the index view.
 //
@@ -57,16 +66,3 @@ exports.stocks = function(req, res) {
       });
   }
 };
-
-function compute_percentage_growth(rows) {
-  var initialvalue= (rows[0]).Open
-  var Length = rows.length;
-  for (var counter=0; counter<rows.length; counter++) {
-    var item=rows[counter];
-    item.percentage_growth = ((item.Open-initialvalue)/initialvalue*100).toFixed(2);
-  }
-}
-
-//$("#stock_details").click( alert("yo"));
-function doSomething()
-{alert("Bob");}
