@@ -43,7 +43,8 @@ exports.stocks = function(req, res) {
       function(err, rows) {
         db.close();
         if (err) return res.json(501, { error: err.message });
-	  compute_percentage_growth(rows);
+
+        compute_percentage_growth(rows);
         res.json(rows);
       });
   } else {
@@ -58,13 +59,12 @@ exports.stocks = function(req, res) {
 };
 
 function compute_percentage_growth(rows) {
-    var initialvalue= (rows[0]).Open
-    var Length = rows.length;
-    for (var counter=0; counter<rows.length; counter++) {
-	var item=rows[counter];
-	item.percentage_growth=((item.Open-initialvalue)/initialvalue*100);
-    }
-    return 
+  var initialvalue= (rows[0]).Open
+  var Length = rows.length;
+  for (var counter=0; counter<rows.length; counter++) {
+    var item=rows[counter];
+    item.percentage_growth = ((item.Open-initialvalue)/initialvalue*100).toFixed(2);
+  }
 }
 
 //$("#stock_details").click( alert("yo"));

@@ -1,5 +1,5 @@
 <div class="container list"></div>
-<div class="container detail"></div>
+<div class="detail" style="display:none;"></div>
 
 <script id="index" type="text/template">
   <article class="sixteen columns">
@@ -11,8 +11,8 @@
 </script>
 
 <script id="detail" type="text/template">
-  <article class="sixteen columns">
-    <a href="/#/" class="one column back">⇤</a>
+  <div class="overlay">
+  <article class="container upper">
     <h2 class="three columns"> <a href="http://finance.yahoo.com/q?s=<%= ticker %>" target="_blank"> <%= ticker %></a> </h2>
 
 <!-- <div class="three columns">  -->
@@ -32,7 +32,7 @@
 -->
 
     <h5 class="one columns">Stock Price</h5> 
-    <div class="seven columns linechart">
+    <div class="eight columns linechart">
       <% _.each(data, function(stock, index) { %>
         <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
           <%= stock.Open %>
@@ -42,9 +42,10 @@
       <% }); %>
 
     </div>
+    <a href="/#/" class="close one column omega btn-dark">X</a>
 <!-- <em>Rank</em>
 </div> -->
-<div class="btn" onclick="doSomething()">my button</div>
+<!-- <div class="btn" onclick="doSomething()">my button</div> -->
 <div id="stock_details" class="detailhover">
 <!-- create div with scrollable window so can easily navigate the data 
 scrollable sidebar or some other more sane menu system. sort by count instead of alpah
@@ -91,5 +92,5 @@ highcahrts
     <% }); %>
 </div>
 </div>
-  </article>
+  </article></div>
 </script>

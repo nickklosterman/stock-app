@@ -32,27 +32,21 @@ window.StockApp.Collections = {};
         data: this.model.toJSON()
       }));
 
-      //
-      // Add the `selected` class to the button for the current ticker, slide
-      //    the view into view, then initialize the line chart.
-      //
-      $('a.btn[data-ticker="'+ this.ticker +'"]').addClass('selected');
-      this.$el.slideDown();
       this.$el.find('.linechart').sparkline('html', {
         chartRangeMin: 1,
         chartRangeMax: 20
       });
     },
+    show: function() {
+      this.$el.fadeIn(100);
+    },
     hide: function() {
-      this.$el.hide();
+      this.$el.fadeOut(100);
     }
   });
 
   StockApp.Views.Index = Backbone.View.extend({
     el: '.list',
-    events: {
-      'click a.btn': 'clearSelection'
-    },
     template: _.template($('#index').html()),
     initialize: function() {
       this.collection.fetch({ success: _.bind(this.render, this) });
@@ -60,13 +54,13 @@ window.StockApp.Collections = {};
     render: function() {
       this.$el.html(this.template({ stocks: this.collection.toJSON() }));
     },
-    clearSelection: function() {
-      $('.selected').removeClass('selected');
-      if (this.detail) this.detail.hide();
-    },
     showDetail: function(options) {
       this.detail = new StockApp.Views.Detail(options);
+      this.detail.show();
     },
+    hideDetail: function() {
+      this.detail.hide();
+    }
   });
 
   StockApp.Router = Backbone.Router.extend({
@@ -76,9 +70,14 @@ window.StockApp.Collections = {};
     },
     index: function() {
       console.log('router::view::index');
-      this.indexView = new StockApp.Views.Index({
-        collection: new StockApp.Collections.Stocks()
-      });
+      
+      if (this.indexView) {
+        this.indexView.hideDetail();
+      } else {
+        this.indexView = new StockApp.Views.Index({
+          collection: new StockApp.Collections.Stocks()
+        });
+      }
     },
     detail: function(ticker) {
       console.log('router::view::detail');
