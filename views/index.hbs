@@ -12,48 +12,84 @@
 
 <script id="detail" type="text/template">
   <article class="sixteen columns">
-
+    <a href="/#/" class="one column back">⇤</a>
     <h2 class="three columns"> <a href="http://finance.yahoo.com/q?s=<%= ticker %>" target="_blank"> <%= ticker %></a> </h2>
 
-    <div class="three columns">
-      <div class="linechart">
-        <% _.each(data, function(stock, index) { %>
-          <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
-            <%= stock.Open %>
-          <% } else { %>
-            <%= stock.Open %>,
-          <% } %>
-        <% }); %>
-      </div>
-      <em>Price</em>
+<!-- <div class="three columns">  -->
+<h5 class="one columns">Stock Rank</h5>
+    <div class="two columns linechart">
+      <% _.each(data, function(stock, index) { %>
+        <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
+          <%= stock.Rank %>
+        <% } else { %>
+          <%= stock.Rank %>,
+        <% } %>
+      <% }); %>
     </div>
-
+<!-- <em>Price</em>
+</div> 
     <div class="three columns">
-      <div class="linechart">
-        <% _.each(data, function(stock, index) { %>
-          <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
-            <%= stock.Rank %>
-          <% } else { %>
-            <%= stock.Rank %>,
-          <% } %>
-        <% }); %>
-      </div>
-      <em>Rank</em>
-    </div>
+-->
 
+    <h5 class="one columns">Stock Price</h5> 
+    <div class="seven columns linechart">
+      <% _.each(data, function(stock, index) { %>
+        <% if (_.size(data) === (parseInt(index, 10) + 1))  { %>
+          <%= stock.Open %>
+        <% } else { %>
+          <%= stock.Open %>,
+        <% } %>
+      <% }); %>
+
+    </div>
+<!-- <em>Rank</em>
+</div> -->
+<div class="btn" onclick="doSomething()">my button</div>
+<div id="stock_details" class="detailhover">
+<!-- create div with scrollable window so can easily navigate the data 
+scrollable sidebar or some other more sane menu system. sort by count instead of alpah
+use kendo?
+highcahrts
+-->
+<div>
     <header class="sixteen columns detail-header">
       <h3 class="three columns alpha">Date</h3>
-      <h3 class="three columns ">Open</h3>
+      <h3 class="three columns ">Open $</h3>
+      <h3 class="three columns ">% Growth </h3>
+
       <h3 class="three columns omega">Rank</h3>
     </header>
-
     <% _.each(data, function(stock) { %>
       <div class="sixteen columns">
         <span class="three columns alpha"><%= stock.Date %></span>
         <span class="three columns ">$<%= stock.Open %></span>
+<% if (stock.percentage_growth > 60 ) { %>
+        <span class="three columns positivePlus"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth > 50 ) { %>
+        <span class="three columns positive50"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth > 40 ) { %>
+        <span class="three columns positive40"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth > 30 ) { %>
+        <span class="three columns positive30"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth > 20 ) { %>
+        <span class="three columns positive20"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth > 10 ) { %>
+        <span class="three columns positive10"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth >= 0 ) { %>
+        <span class="three columns positive0"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth < -30 ) { %>
+        <span class="three columns negative30"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth < -20 ) { %>
+        <span class="three columns negative20"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth < -10 ) { %>
+        <span class="three columns negative10"><%= stock.percentage_growth %></span>
+<% } else if (stock.percentage_growth < 0 ) { %>
+        <span class="three columns negative0"><%= stock.percentage_growth %></span>
+<% } %>
         <span class="three columns omega"><%= stock.Rank %></span>
       </div>
     <% }); %>
-
+</div>
+</div>
   </article>
 </script>
