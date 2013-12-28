@@ -17,9 +17,6 @@ window.StockApp.Collections = {};
   StockApp.Views.Detail = Backbone.View.extend({
     el: '.detail',
     template: _.template($('#detail').html()),
-    events: {
-      'click .overlay': 'hide'
-    },
     initialize: function(options) {
       this.ticker = options.ticker;
       this.model = new StockApp.Models.Stock();
