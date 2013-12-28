@@ -853,14 +853,6 @@ legend span {
 
 /* Custom styles go le here: */
 
-.selected {
-  background-color: #C50000 !important;
-}
-
-.selected:hover {
-  background-color: #AE0000 !important;
-}
-
 .list {
   margin-top: 40px;
 }
