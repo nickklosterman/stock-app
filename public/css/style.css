@@ -915,9 +915,12 @@ a.btn, a.btn-dark {
 }
 
 .close {
-  font-size: 20px;
-  text-align: left;
+  position: absolute;
+  font-size: 18px;
   text-decoration: none;
+  right: 15px;
+  text-align: right;
+  font-family: Arial, "MS Trebuchet", sans-serif;
 }
 
 * {
@@ -926,6 +929,16 @@ a.btn, a.btn-dark {
       -ms-transition: background-color 400ms ease;
        -o-transition: background-color 400ms ease;
           transition: background-color 400ms ease;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #000;
+}
+
+::selection {
+  color: #fff;
+  background: #000;
 }
 
 /* Smaller than standard 960 (devices and browsers) */
@@ -950,7 +963,5 @@ a.btn, a.btn-dark {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
-  .close {
-    text-align: center;
-  }
+  
 }
