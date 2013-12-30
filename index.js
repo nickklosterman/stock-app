@@ -10,10 +10,16 @@ app.set('views', path.resolve(__dirname, 'views'));
 
 app.disable('x-powered-by');
 
+app.use(express.favicon());
+app.use(express.logger('dev'));
 app.use(express.compress());
 app.use(express.json());
-app.use(express.favicon());
+app.use(app.router);
 app.use(express.static(path.resolve(__dirname, 'public')));
+
+if ('development' === app.get('env')) {
+  app.use(express.errorHandler());
+}
 
 //
 // Routes
