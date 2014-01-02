@@ -6,6 +6,11 @@ window.StockApp.Collections = {};
 (function(StockApp, $, Backbone, _) {
   'use strict';
 
+  //
+  // Models & Collections
+  // ====================
+  //
+
   StockApp.Models.Stock = Backbone.Model.extend({
     rootUrl: '/api/stocks/'
   });
@@ -13,6 +18,11 @@ window.StockApp.Collections = {};
   StockApp.Collections.Stocks = Backbone.Collection.extend({
     url: '/api/stocks'
   });
+
+  //
+  // Views
+  // =====
+  //
 
   StockApp.Views.Detail = Backbone.View.extend({
     el: '.detail',
@@ -65,6 +75,11 @@ window.StockApp.Collections = {};
     }
   });
 
+  //
+  // Router
+  // ======
+  //
+
   StockApp.Router = Backbone.Router.extend({
     routes: {
       '': 'index',
@@ -72,7 +87,7 @@ window.StockApp.Collections = {};
     },
     index: function() {
       console.log('router::view::index');
-      
+
       if (this.indexView) {
         this.indexView.hideDetail();
       } else {
@@ -98,4 +113,4 @@ window.StockApp.Collections = {};
   new StockApp.Router();
   Backbone.history.start();
 
-})(window.StockApp, window.jQuery, window.Backbone, window._);
+}(window.StockApp, window.jQuery, window.Backbone, window._));
