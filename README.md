@@ -3,6 +3,8 @@ stock-app
 
 An Awesome Stock App to Quell fiveisprime.
 
+# Populating the SQLite Database
+
 To populate the sqlite database with all applicable data,
 you will want to run
 
