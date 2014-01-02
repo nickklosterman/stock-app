@@ -1,3 +1,7 @@
+//
+// Creates a single global for all Stock App related client-side pieces.
+//
+
 window.StockApp = {};
 window.StockApp.Views = {};
 window.StockApp.Models = {};
