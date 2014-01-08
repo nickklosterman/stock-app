@@ -888,25 +888,29 @@ a.btn, a.btn-dark {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
   background-color: rgba(0,0,0,0.75);
 }
 
-.detail-inner {
+.detail-outer {
   z-index: 15;
   margin-top: 5px;
   padding-top: 10px;
-  height: 760px;
-  overflow: scroll;
   background-color: #fff;
   -webkit-box-shadow: 0 0 20px #000;
      -moz-box-shadow: 0 0 20px #000;
           box-shadow: 0 0 20px #000;
+}
+
+.detail-inner {
+  height: 760px;
+  overflow: scroll;
 }
 
 .close {
@@ -918,12 +922,10 @@ a.btn, a.btn-dark {
   font-family: Arial, "MS Trebuchet", sans-serif;
 }
 
-* {
-  -webkit-transition: background-color 400ms ease;
-     -moz-transition: background-color 400ms ease;
-      -ms-transition: background-color 400ms ease;
-       -o-transition: background-color 400ms ease;
-          transition: background-color 400ms ease;
+.row {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 2px 0;
 }
 
 ::-moz-selection {
