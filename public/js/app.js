@@ -15,11 +15,11 @@ window.StockApp.Collections = {};
   // ====================
   //
 
-  StockApp.Models.Stock = Backbone.Model.extend({
+  StockApp.Models.StockDetail = Backbone.Model.extend({
     rootUrl: '/api/stocks/'
   });
 
-  StockApp.Collections.Stocks = Backbone.Collection.extend({
+  StockApp.Collections.StockList = Backbone.Collection.extend({
     url: '/api/stocks'
   });
 
@@ -37,7 +37,7 @@ window.StockApp.Collections = {};
     template: _.template($('#detail').html()),
     initialize: function(options) {
       this.ticker = options.ticker;
-      this.model = new StockApp.Models.Stock();
+      this.model = new StockApp.Models.StockDetail();
       // Set the model's url to get the data for the correct ticker.
       this.model.url = function() {
         return this.rootUrl + options.ticker;
@@ -108,7 +108,7 @@ window.StockApp.Collections = {};
         this.indexView.hideDetail();
       } else {
         this.indexView = new StockApp.Views.Index({
-          collection: new StockApp.Collections.Stocks()
+          collection: new StockApp.Collections.StockList()
         });
       }
     },
