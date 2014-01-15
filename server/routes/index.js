@@ -48,20 +48,13 @@ exports.stocks = function(req, res) {
   var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
 
   if (req.params.id) {
-    db.all(
-//      util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id),
-//select date,rank,open from bc20_sbux_master where date > (select min(date) from bc20_sbux_master where rank > 0 );
-	//      util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > ( SELECT min(rank) from BC20_%s_Master WHERE rank > 0 )', req.params.id, req.params.id),
-      //util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "2013-05-01" ', req.params.id), //WORKS
-	util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "%s" ', req.params.id,"2013-04-15"), //WORKS
-
-      function(err, rows) {
-        db.close();
-        if (err) return res.json(501, { error: err.message });
-	console.log(rows);
-        compute_percentage_growth(rows);
-        res.json(rows);
-      });
+    db.all(util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > (select min(date) from BC20_%s_Master where rank > 0)', req.params.id, req.params.id),
+    function(err, rows) {
+      db.close();
+      if (err) return res.json(501, { error: err.message });
+      compute_percentage_growth(rows);
+      res.json(rows);
+    });
   } else {
     db.all(
       'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 GROUP BY stockticker ORDER BY stockticker ASC',
