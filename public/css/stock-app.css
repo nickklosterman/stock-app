@@ -1,0 +1,40 @@
+.positive0{
+background-color: #44ff44;
+}
+.positive10{
+background-color: #00ff00;
+}
+.positive20{
+background-color: #00bb00;
+}
+.positive30{
+background-color: #00a800;
+}
+.positive40{
+background-color: #008800;
+color: white;
+}
+.positive50{
+background-color: #006600;
+color: white;
+}
+.positivePlus{
+background-color: #004000;
+color: white;
+}
+
+.negative0{
+background-color: #FF5555;
+}
+.negative10{
+background-color: #BB0000;
+color: white;
+}
+.negative20{
+background-color: #A80000;
+color: white;
+}
+.negative30{
+background-color: #880000;
+color: white;
+}
