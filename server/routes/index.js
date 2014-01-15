@@ -2,6 +2,7 @@ var sqlite3 = require('sqlite3')
   , util    = require('util');
 
 function compute_percentage_growth(rows) {
+  console.log(rows[0]);
   var initialvalue = (rows[0]).Open;
 
   for (var counter = 0; counter < rows.length; counter++) {
@@ -48,11 +49,16 @@ exports.stocks = function(req, res) {
 
   if (req.params.id) {
     db.all(
-      util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id),
+//      util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id),
+//select date,rank,open from bc20_sbux_master where date > (select min(date) from bc20_sbux_master where rank > 0 );
+	//      util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > ( SELECT min(rank) from BC20_%s_Master WHERE rank > 0 )', req.params.id, req.params.id),
+      //util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "2013-05-01" ', req.params.id), //WORKS
+	util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "%s" ', req.params.id,"2013-04-15"), //WORKS
+
       function(err, rows) {
         db.close();
         if (err) return res.json(501, { error: err.message });
-
+	console.log(rows);
         compute_percentage_growth(rows);
         res.json(rows);
       });
