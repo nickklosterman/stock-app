@@ -34,6 +34,14 @@ window.StockApp.Collections = {};
   //
   StockApp.Views.Detail = Backbone.View.extend({
     el: '.detail',
+    events: {
+	'dblclick': "mykeypress",
+	'keypress': "mykeypress",
+	'click .three': "mykeypress"
+    },
+    mykeypress:function() {
+	console.log("woohoo");
+    },
     template: _.template($('#detail').html()),
     initialize: function(options) {
       this.ticker = options.ticker;
@@ -75,6 +83,16 @@ window.StockApp.Collections = {};
   StockApp.Views.Index = Backbone.View.extend({
     el: '.list',
     template: _.template($('#index').html()),
+    events: {
+	"dblclick": "mykeypress",
+	"keypress": "mykeypress",
+	"click .three": "mykeypress",
+	
+    },
+    mykeypress:function() {
+	console.log("woohoo Index");
+    },
+
     initialize: function() {
       this.collection.fetch({ success: _.bind(this.render, this) });
     },
