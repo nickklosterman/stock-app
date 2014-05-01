@@ -53,9 +53,10 @@ exports.dates = function(req, res) {
 exports.stocks = function(req, res) {
   //var db = new sqlite3.Database('IBDTestDatabaseBC20.sqlite');
 //var db = new sqlite3.Database('IBDdatabase.sqlite');
-//    console.log("exports.stocks using:"+sqlite_database);
+
    var db = new sqlite3.Database(sqlite_database);
-    var table = "BC20";
+    var table = "IBD50";//"BC20";
+    console.log("exports.stocks using:"+sqlite_database+" and table:"+table);
   if (req.params.id) {
     db.all(
 //      util.format('SELECT date,open,rank FROM BC20_%s_Master ORDER BY date ASC', req.params.id)
