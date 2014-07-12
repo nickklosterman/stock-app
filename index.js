@@ -2,7 +2,8 @@ var express = require('express')
   //, routes  = require('./server/routes')(app,process.argv[2] || 'IBDTestDatabaseBC20.sqlite')
   , path    = require('path')
   , app     = express();
-var routes  = require('./server/routes')(app,process.argv[2] || 'IBDTestDatabaseBC20.sqlite', process.argv[3] || 'BC20' );
+
+var routes  = require('./server/routes')(app,process.argv[2] || 'IBDTestDatabaseBC20.sqlite', process.argv[3] || 'BC20',process.argv[3] || 2013 );
 
 //http://stackoverflow.com/questions/4351521/how-to-pass-command-line-arguments-to-node-js http://nodejs.org/docs/latest/api/process.html#process_process_argv
 if ( false ) {

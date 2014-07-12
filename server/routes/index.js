@@ -1,7 +1,9 @@
 var sqlite3 = require('sqlite3')
   , util    = require('util');
+
 var sqlite_database="";
 var database_table="";
+, query_year=2013;
 
 function compute_percentage_growth(rows) {
   //check since sometimes some records missing from database
@@ -44,6 +46,7 @@ exports.dates = function(req, res) {
         res.json(rows);
       });
   } else {
+
     db.all('SELECT distinct(date) from '+database_table, function(err, rows) {
       db.close();
       if (err) return res.json(501, { error: err.message });
@@ -60,6 +63,11 @@ exports.stocks = function(req, res) {
 //var db = new sqlite3.Database('IBDdatabase.sqlite');
 
    var db = new sqlite3.Database(sqlite_database);
+
+// var id=(req.params.id || "aapl")
+// , dattable=(req.params.table || "IBD50")
+// , year=(req.params.year || 2014);
+
 //    var table = database_table;//"BC20";//"IBD50";//"BC20";
     console.log("exports.stocks using:"+sqlite_database+" and table:"+database_table);
   if (req.params.id) {
@@ -68,12 +76,20 @@ exports.stocks = function(req, res) {
 //      util.format('SELECT date,open,rank FROM '+database_table+'_%s_Master WHERE date >= ( SELECT min(date) from '+database_table+'_%s_Master WHERE rank > 0 and  date >= "2013-01-01" and date < "2013-12-31"  ) ORDER BY date ASC', req.params.id, req.params.id),
 //util.format('SELECT '+database_table+'_%s_Master.Date, '+database_table+'_%s_Master.Open, '+database_table+'_%s_Master.High, '+database_table+'_%s_Master.Low, '+database_table+'_%s_Master.Close, '+database_table+'_%s_Master.Volume, '+database_table+'_%s_Master.Adj_Close, _GSPC.Open as SP500Open, _GSPC.High as SP500High , _GSPC.Low as SP500Low , _GSPC.Close as SP500Close , _GSPC.Volume as SP500Volume , _GSPC.Adj_Close as SP500Adj_Close  FROM '+database_table+'_%s_Master INNER JOIN _GSPC ON '+database_table+'_%s_Master.Date =  _GSPC.Date WHERE '+database_table+'_%s_Master.date >= (select min('+database_table+'_%s_Master.date) from '+database_table+'_%s_Master where '+database_table+'_%s_Master.rank > 0 and '+database_table+'_%s_Master.date >="2013-01-01" and '+database_table+'_%s_Master.date < "2013-12-31" ) ORDER BY '+database_table+'_%s_Master.Date ASC', req.params.id, req.params.id),
 util.format('SELECT BC20_PCLN_Master.Date, BC20_PCLN_Master.Open, BC20_PCLN_Master.High, BC20_PCLN_Master.Low, BC20_PCLN_Master.Close, BC20_PCLN_Master.Volume, BC20_PCLN_Master.Adj_Close, _GSPC.Open as SP500Open, _GSPC.High as SP500High , _GSPC.Low as SP500Low , _GSPC.Close as SP500Close , _GSPC.Volume as SP500Volume , _GSPC.Adj_Close as SP500Adj_Close  FROM BC20_PCLN_Master INNER JOIN _GSPC ON BC20_PCLN_Master.Date =  _GSPC.Date WHERE BC20_PCLN_Master.date >= (select min(BC20_PCLN_Master.date) from BC20_PCLN_Master where BC20_PCLN_Master.rank > 0 and BC20_PCLN_Master.date >="2013-01-01" and BC20_PCLN_Master.date < "2013-12-31" ) ORDER BY BC20_PCLN_Master.Date ASC'),
+  console.log("exports.stocks using:"+sqlite_database+" and table:"+table);
+
+      util.format('SELECT date,open,rank FROM %s_%s_Master WHERE date >= ( SELECT min(date) from %s_%s_Master WHERE rank > 0 and  date >= "%s-01-01" and date < "%s-12-31"  ) ORDER BY date ASC',table, id, table, id, year, year),
+
+
       //util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "2013-05-01" ', req.params.id), //WORKS
 	//util.format('SELECT date,open,rank FROM BC20_%s_Master WHERE date > "%s" ', req.params.id,"2013-04-15"), //WORKS
 
       function(err, rows) {
         db.close();
-        if (err) return res.json(501, { error: err.message });
+        if (err) {
+	    console.log(err);
+	    return res.json(501, { error: err.message });
+	};
         compute_percentage_growth(rows);
         res.json(rows);
       });
@@ -81,10 +97,12 @@ util.format('SELECT BC20_PCLN_Master.Date, BC20_PCLN_Master.Open, BC20_PCLN_Mast
   } else {
     db.all(
 //      'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 GROUP BY stockticker ORDER BY stockticker ASC',
-      'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM '+database_table+' WHERE date >= "2013-01-01" and date < "2013-12-31" GROUP BY stockticker ORDER BY stockticker ASC',
+//      'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM '+database_table+' WHERE date >= "2013-01-01" and date < "2013-12-31" GROUP BY stockticker ORDER BY stockticker ASC',
+//      'SELECT stockticker,COUNT(stockticker) as count_stockticker FROM BC20 WHERE date >= "2013-01-01" and date < "2013-12-31" GROUP BY stockticker ORDER BY stockticker ASC',
+      util.format('SELECT stockticker,COUNT(stockticker) as count_stockticker FROM %s WHERE date >= "%s-01-01" and date < "%s-12-31" GROUP BY stockticker ORDER BY stockticker ASC',table,year,year),
       function(err, rows) {
         db.close();
-        if (err) return res.json(501, { error: err.message });
+        if (err) { console.log(err);  return res.json(501, { error: err.message });}
         res.json(rows);
       });
   }
@@ -92,12 +110,14 @@ util.format('SELECT BC20_PCLN_Master.Date, BC20_PCLN_Master.Open, BC20_PCLN_Mast
 
 //http://stackoverflow.com/questions/13151693/passing-arguments-to-require-when-loading-module
 //https://www.google.com/search?q=exports.module
-module.exports = function(app,db,table) { 
+module.exports = function(app,db,table,year) { 
 sqlite_database=db;
 database_table=table;
+query_year=year;
 console.log(sqlite_database+",db: "+db);
 app.get('/', exports.index);
 app.get('/api/stocks/:id?', exports.stocks);
+app.get('/api/stocks/:table/:year/:id?',exports.stocks);
 };
 
 

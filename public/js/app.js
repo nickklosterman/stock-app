@@ -136,6 +136,7 @@ window.StockApp.Collections = {};
       //    instantiate the index view. This will correctly save the state
       //    of the application in the URL of the ticker.
       //
+	console.log("passed in ticker"+ticker);
       if (!this.indexView) this.index();
       this.indexView.showDetail({ ticker: ticker });
     }
