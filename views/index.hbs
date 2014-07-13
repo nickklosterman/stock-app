@@ -60,25 +60,25 @@
           <% if (stock.percentage_growth > 60 ) { %>
             <span class="three columns positivePlus"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth > 50 ) { %>
-            <span class="three columns positive50"><%= stock.percentage_growth %> %</span>
+            <span class="three columns positive50"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth > 40 ) { %>
-            <span class="three columns positive40"><%= stock.percentage_growth %> %</span>
+            <span class="three columns positive40"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth > 30 ) { %>
-            <span class="three columns positive30"><%= stock.percentage_growth %> %</span>
+            <span class="three columns positive30"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth > 20 ) { %>
-            <span class="three columns positive20"><%= stock.percentage_growth %> %</span>
+            <span class="three columns positive20"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth > 10 ) { %>
-            <span class="three columns positive10"><%= stock.percentage_growth %> %</span>
+            <span class="three columns positive10"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth >= 0 ) { %>
             <span class="three columns positive0"><%= stock.percentage_growth %> % vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth < -30 ) { %>
-            <span class="three columns negative30"><%= stock.percentage_growth %> %</span>
+            <span class="three columns negative30"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth < -20 ) { %>
-            <span class="three columns negative20"><%= stock.percentage_growth %> %</span>
+            <span class="three columns negative20"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth < -10 ) { %>
-            <span class="three columns negative10"><%= stock.percentage_growth %> %</span>
+            <span class="three columns negative10"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } else if (stock.percentage_growth < 0 ) { %>
-            <span class="three columns negative0"><%= stock.percentage_growth %> %</span>
+            <span class="three columns negative0"><%= stock.percentage_growth %> %  vs SP500:<%= stock.percentage_growthSP500 %> %</span>
           <% } %>
             <span class="three columns omega"><%= stock.Rank %></span>
           </div>
